@@ -32,8 +32,10 @@ class GlobalElevatedButton extends StatelessWidget {
         ),
         child: isDeletedButton
             ? Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SvgPicture.asset(AppIcons.deleteIcon),
+                  SizedBox(width: 10.w),
                   Text(
                     text,
                     style: AppTextStyles.style16w600

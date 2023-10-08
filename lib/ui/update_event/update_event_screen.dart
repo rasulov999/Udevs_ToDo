@@ -8,14 +8,14 @@ import 'package:udevs_todo/utils/icons.dart';
 import 'package:udevs_todo/widgets/global_elevated_button.dart';
 import 'package:udevs_todo/widgets/textfield_with_title.dart';
 
-class AddEventScreen extends StatefulWidget {
-  const AddEventScreen({super.key});
+class UpdateEventScreen extends StatefulWidget {
+  const UpdateEventScreen({super.key});
 
   @override
-  State<AddEventScreen> createState() => _AddEventScreenState();
+  State<UpdateEventScreen> createState() => _AddEventScreenState();
 }
 
-class _AddEventScreenState extends State<AddEventScreen> {
+class _AddEventScreenState extends State<UpdateEventScreen> {
   TextEditingController nameController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   TextEditingController locationController = TextEditingController();
@@ -36,17 +36,9 @@ class _AddEventScreenState extends State<AddEventScreen> {
         child: GlobalElevatedButton(
             backgroundColor: AppColors.c_009FEE,
             onTap: () async {
-              await LocalDatabase.insertToDb(EventModel(
-                name: nameController.text,
-                description: descriptionController.text,
-                location: locationController.text,
-              ));
-
-              setState(() {
-                Navigator.pop(context);
-              });
+            
             },
-            text: "Add"),
+            text: "Update"),
       ),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
