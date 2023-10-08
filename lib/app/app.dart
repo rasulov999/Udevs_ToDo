@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:udevs_todo/ui/home/screen/home_screen.dart';
+import 'package:udevs_todo/router/app_router.dart';
+import 'package:udevs_todo/utils/constants.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -23,9 +24,8 @@ class MyApp extends StatelessWidget {
         builder: (context, child) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            // onGenerateRoute: AppRouter.generateRoute,
-            //  initialRoute: splashScreen,
-          home: HomeScreen()
+            onGenerateRoute: AppRouter.generateRoute,
+            initialRoute: homeScreen,
           );
         });
   }
