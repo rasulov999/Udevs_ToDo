@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:udevs_todo/app/app.dart';
+import 'package:udevs_todo/app/bloc_observer.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,6 +17,6 @@ void main() {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-  // Bloc.observer = AppBlocObserver();
+  Bloc.observer = AppBlocObserver();
   runApp(const App());
 }
