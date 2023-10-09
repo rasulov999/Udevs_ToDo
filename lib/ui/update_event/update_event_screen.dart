@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:udevs_todo/data/database/local_database.dart';
-import 'package:udevs_todo/data/models/event_model.dart';
 import 'package:udevs_todo/utils/colors.dart';
 import 'package:udevs_todo/utils/icons.dart';
 import 'package:udevs_todo/widgets/global_elevated_button.dart';

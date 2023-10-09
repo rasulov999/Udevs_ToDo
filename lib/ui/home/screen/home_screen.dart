@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:udevs_todo/ui/home/bloc/bloc%20copy/get_events_bloc.dart';
+import 'package:udevs_todo/data/models/event_model.dart';
+import 'package:udevs_todo/ui/home/bloc/get_events_bloc.dart';
 import 'package:udevs_todo/ui/home/widget/event_container.dart';
 import 'package:udevs_todo/ui/home/widget/schedule_button.dart';
+import 'package:udevs_todo/utils/colors.dart';
 import 'package:udevs_todo/utils/constants.dart';
 import 'package:udevs_todo/utils/form_status.dart';
+import 'package:udevs_todo/utils/styles.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -36,11 +39,13 @@ class HomeScreen extends StatelessWidget {
                       child: CircularProgressIndicator(),
                     );
                   } else if (state.status == Status.success) {
+                    List<EventModel> events = [];
                     return ListView(
                       physics: const BouncingScrollPhysics(),
                       children:
                           List.generate(state.eventModel!.length, (index) {
                         var item = state.eventModel![index];
+                        events = (state.eventModel!).reversed.toList();
                         return InkWell(
                           onTap: () => Navigator.pushNamed(
                               context, eventDetailScreen,
@@ -48,14 +53,21 @@ class HomeScreen extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.symmetric(vertical: 10),
                             child: EventContainer(
-                              eventModel: item,
+                              eventModel: events[index],
                             ),
                           ),
                         );
                       }),
                     );
+                  } else {
+                    return Center(
+                      child: Text(
+                        "No tasks",
+                        style: AppTextStyles.style16w600
+                            .copyWith(color: AppColors.black),
+                      ),
+                    );
                   }
-                  return const SizedBox();
                 },
               ),
             ),

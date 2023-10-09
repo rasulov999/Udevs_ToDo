@@ -56,7 +56,7 @@ class LocalDatabase {
       EvetFields.name,
       EvetFields.description,
       EvetFields.location,
-     // EvetFields.color
+      // EvetFields.color
     ]);
     var list = listOfEvent.map((e) => EventModel.fromJson(e)).toList();
     return list;
@@ -65,5 +65,21 @@ class LocalDatabase {
   static Future<int> deleteEventById(int id) async {
     final db = await getInstance.getDb();
     return db.delete(tableName, where: 'id=?', whereArgs: [id]);
+  }
+
+  static Future<int> updateEvent(EventModel eventModel) async {
+    Map<String, dynamic> col = {
+      EvetFields.name: eventModel.name,
+      EvetFields.description: eventModel.description,
+      EvetFields.location: EvetFields.location,
+    };
+
+    final db = await getInstance.getDb();
+    return await db.update(
+      tableName,
+      col,
+      where: '${EvetFields.id} = ?',
+      whereArgs: [eventModel.id],
+    );
   }
 }

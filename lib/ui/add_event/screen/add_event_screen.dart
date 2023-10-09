@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:udevs_todo/data/database/local_database.dart';
 import 'package:udevs_todo/data/models/event_model.dart';
+import 'package:udevs_todo/ui/add_event/bloc/add_event_bloc_bloc.dart';
+import 'package:udevs_todo/ui/home/bloc/get_events_bloc.dart';
 import 'package:udevs_todo/utils/colors.dart';
+import 'package:udevs_todo/utils/form_status.dart';
 import 'package:udevs_todo/utils/icons.dart';
 import 'package:udevs_todo/widgets/global_elevated_button.dart';
 import 'package:udevs_todo/widgets/textfield_with_title.dart';
@@ -33,20 +36,28 @@ class _AddEventScreenState extends State<AddEventScreen> {
       ),
       bottomNavigationBar: Padding(
         padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10),
-        child: GlobalElevatedButton(
-            backgroundColor: AppColors.c_009FEE,
-            onTap: () async {
-              await LocalDatabase.insertToDb(EventModel(
-                name: nameController.text,
-                description: descriptionController.text,
-                location: locationController.text,
-              ));
-
-              setState(() {
-                Navigator.pop(context);
-              });
-            },
-            text: "Add"),
+        child: BlocListener<AddEventBlocBloc, AddEventBlocState>(
+          listener: (context, state) {
+            if (state.status == Status.added) {
+              BlocProvider.of<GetEventsBloc>(context).add(GetEventsEvent());
+               Future.delayed(const Duration(milliseconds: 50))
+                .then((value) => Navigator.pop(context));
+            }
+          },
+          child: GlobalElevatedButton(
+              backgroundColor: AppColors.c_009FEE,
+              onTap: () {
+                BlocProvider.of<AddEventBlocBloc>(context).add(
+                  AddEvent(
+                    eventModel: EventModel(
+                        name: nameController.text,
+                        description: descriptionController.text,
+                        location: locationController.text),
+                  ),
+                );
+              },
+              text: "Add"),
+        ),
       ),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),

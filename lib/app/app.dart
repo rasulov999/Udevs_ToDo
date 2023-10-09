@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:udevs_todo/data/repository/events_repository.dart';
 import 'package:udevs_todo/router/app_router.dart';
-import 'package:udevs_todo/ui/home/bloc/bloc%20copy/get_events_bloc.dart';
+import 'package:udevs_todo/ui/home/bloc/get_events_bloc.dart';
 import 'package:udevs_todo/utils/constants.dart';
 
 class App extends StatelessWidget {
@@ -11,18 +10,10 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiRepositoryProvider(
-        providers: [
-          RepositoryProvider(
-            create: (context) => EventsRepository(),
-          )
-        ],
-        child: MultiBlocProvider(providers: [
-          BlocProvider(
-            create: (context) => GetEventsBloc(context.read<EventsRepository>())
-              ..add(GetEventsEvent()),
-          ),
-        ], child: MyApp()));
+    return MultiBlocProvider(providers: [
+      BlocProvider(create: (context) => GetEventsBloc()..add(GetEventsEvent())),
+      
+    ], child: MyApp());
   }
 }
 

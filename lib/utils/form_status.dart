@@ -3,4 +3,7 @@ enum Status {
   loading,
   error,
   success,
+  added,
+  deleted,
+  updated
 }
