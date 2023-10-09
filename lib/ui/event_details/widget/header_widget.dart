@@ -43,7 +43,7 @@ final EventModel eventModel;
               ),
               TextButton(
                 onPressed: () =>
-                    Navigator.pushNamed(context, updateEventScreen),
+                    Navigator.pushNamed(context, updateEventScreen, arguments: eventModel),
                 child: Row(
                   children: [
                     SvgPicture.asset(
@@ -96,7 +96,7 @@ final EventModel eventModel;
               ),
               SizedBox(width: 6.w),
               Text(
-                "Stamford Bridge",
+                eventModel.location,
                 style: AppTextStyles.style14w500
                     .copyWith(fontSize: 10, color: AppColors.white),
               ),

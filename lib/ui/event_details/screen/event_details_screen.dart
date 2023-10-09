@@ -27,21 +27,25 @@ class EventDetailsSccreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                SizedBox(height: 30.h),
                 Text(
                   "Reminder",
                   style: AppTextStyles.style16w600
                       .copyWith(color: AppColors.black),
                 ),
+                SizedBox(height: 20.h),
                 Text(
                   "15 minutes before",
                   style: AppTextStyles.style14w500
                       .copyWith(fontSize: 16, color: AppColors.c_7C7B7B),
                 ),
+                SizedBox(height: 20.h),
                 Text(
                   "Description",
                   style: AppTextStyles.style16w600
                       .copyWith(color: AppColors.black),
                 ),
+                SizedBox(height: 20.h),
                 Text(
                   eventModel.description,
                   style: AppTextStyles.style8w400

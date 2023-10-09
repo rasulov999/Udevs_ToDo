@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:table_calendar/table_calendar.dart';
 import 'package:udevs_todo/data/models/event_model.dart';
 import 'package:udevs_todo/ui/home/bloc/get_events_bloc.dart';
 import 'package:udevs_todo/ui/home/widget/event_container.dart';
@@ -24,9 +25,12 @@ class HomeScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 28),
         child: Column(
           children: [
-            Container(
-              height: 300,
-              color: Colors.amber,
+            TableCalendar(
+              firstDay: DateTime.utc(1950, 1, 1),
+              focusedDay: DateTime.now(),
+              lastDay: DateTime.utc(
+                2950,
+              ),
             ),
             ScheduleButton(
               onTap: () => Navigator.pushNamed(context, addEventScreen),
@@ -44,12 +48,11 @@ class HomeScreen extends StatelessWidget {
                       physics: const BouncingScrollPhysics(),
                       children:
                           List.generate(state.eventModel!.length, (index) {
-                        var item = state.eventModel![index];
                         events = (state.eventModel!).reversed.toList();
                         return InkWell(
                           onTap: () => Navigator.pushNamed(
                               context, eventDetailScreen,
-                              arguments: item),
+                              arguments: events[index]),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(vertical: 10),
                             child: EventContainer(

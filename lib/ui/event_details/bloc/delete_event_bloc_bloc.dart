@@ -10,12 +10,14 @@ part 'delete_event_bloc_state.dart';
 
 class DeleteEventBlocBloc
     extends Bloc<DeleteEventBlocEvent, DeleteEventBlocState> {
-  DeleteEventBlocBloc() : super(DeleteEventBlocState()) {
+  DeleteEventBlocBloc() : super( DeleteEventBlocState()) {
     on<DeleteEvent>(deleteEvent);
   }
   deleteEvent(DeleteEvent event, Emitter emit) async {
-    await getIt<EventsRepository>().deleteEventById(event.eventModel.id!);
-    emit(state.copyWith(status: Status.deleted));
-    // add(GetAllEvents() as DeleteEventBlocEvent);
+    var deletedId =
+        await getIt<EventsRepository>().deleteEventById(event.eventModel.id!);
+    if (deletedId != -1) {
+      emit(state.copyWith(status: Status.deleted));
+    }
   }
 }

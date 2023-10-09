@@ -1,8 +1,8 @@
 part of 'update_task_bloc.dart';
 
-sealed class UpdateTaskEvent extends Equatable {
-  const UpdateTaskEvent();
+abstract class UpdateTaskEvent {}
 
-  @override
-  List<Object> get props => [];
+class UpdateTask extends UpdateTaskEvent{
+  UpdateTask({required this.eventModel});
+  final EventModel eventModel;
 }

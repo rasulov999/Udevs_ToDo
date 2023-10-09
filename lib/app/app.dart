@@ -12,7 +12,6 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(providers: [
       BlocProvider(create: (context) => GetEventsBloc()..add(GetEventsEvent())),
-      
     ], child: MyApp());
   }
 }

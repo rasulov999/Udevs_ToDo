@@ -1,11 +1,11 @@
 part of 'get_events_bloc.dart';
 
 class GetEventsState extends Equatable {
-  Status? status;
-  String? error;
-  List<EventModel>? eventModel;
+ final  Status? status;
+  final String? error;
+  final List<EventModel>? eventModel;
 
-  GetEventsState(
+ const GetEventsState(
       {required this.status, required this.error, required this.eventModel});
 
   GetEventsState copyWith({

@@ -6,6 +6,7 @@ import 'package:udevs_todo/ui/add_event/screen/add_event_screen.dart';
 import 'package:udevs_todo/ui/event_details/bloc/delete_event_bloc_bloc.dart';
 import 'package:udevs_todo/ui/event_details/screen/event_details_screen.dart';
 import 'package:udevs_todo/ui/home/screen/home_screen.dart';
+import 'package:udevs_todo/ui/update_event/bloc/update_task_bloc.dart';
 import 'package:udevs_todo/ui/update_event/update_event_screen.dart';
 import 'package:udevs_todo/utils/constants.dart';
 
@@ -13,12 +14,14 @@ class AppRouter {
   static Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case homeScreen:
-        return navigateTo(HomeScreen());
-       case addEventScreen:
+        return MaterialPageRoute(
+          builder: (_) => HomeScreen(),
+        );
+      case addEventScreen:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
             create: (context) => AddEventBlocBloc(),
-            child: AddEventScreen()
+            child: AddEventScreen(),
           ),
         );
       case eventDetailScreen:
@@ -31,11 +34,15 @@ class AppRouter {
           ),
         );
       case updateEventScreen:
-        return navigateTo(UpdateEventScreen());
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => UpdateTaskBloc(),
+            child: UpdateEventScreen(
+              eventModel: settings.arguments as EventModel,
+            ),
+          ),
+        );
     }
     return null;
   }
 }
-
-MaterialPageRoute navigateTo(Widget widget) =>
-    MaterialPageRoute(builder:(context) => widget,);

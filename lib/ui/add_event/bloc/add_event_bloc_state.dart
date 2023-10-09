@@ -1,11 +1,11 @@
 part of 'add_event_bloc_bloc.dart';
 
 class AddEventBlocState extends Equatable {
-  Status? status;
-  String? error;
-  List<EventModel>? eventModel;
+  final Status? status;
+ final  String? error;
+  final List<EventModel>? eventModel;
 
-  AddEventBlocState(
+ const  AddEventBlocState(
       {required this.status, required this.error, required this.eventModel});
 
   AddEventBlocState copyWith({

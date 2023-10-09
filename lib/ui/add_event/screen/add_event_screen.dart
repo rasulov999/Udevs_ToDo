@@ -22,6 +22,7 @@ class _AddEventScreenState extends State<AddEventScreen> {
   TextEditingController nameController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   TextEditingController locationController = TextEditingController();
+  TextEditingController timeController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -40,8 +41,8 @@ class _AddEventScreenState extends State<AddEventScreen> {
           listener: (context, state) {
             if (state.status == Status.added) {
               BlocProvider.of<GetEventsBloc>(context).add(GetEventsEvent());
-               Future.delayed(const Duration(milliseconds: 50))
-                .then((value) => Navigator.pop(context));
+              Future.delayed(const Duration(milliseconds: 50))
+                  .then((value) => Navigator.pop(context));
             }
           },
           child: GlobalElevatedButton(
@@ -64,18 +65,27 @@ class _AddEventScreenState extends State<AddEventScreen> {
         padding: EdgeInsets.symmetric(horizontal: 15.w),
         child: Column(
           children: [
+            SizedBox(height: 25.h),
             TextfieldWithTitle(
               title: "Event name",
               controller: nameController,
             ),
+             SizedBox(height: 20.h),
             TextfieldWithTitle(
               title: "Event description",
               controller: descriptionController,
               linesCount: 5,
             ),
+              SizedBox(height: 20.h),
             TextfieldWithTitle(
               title: "Event location",
               controller: locationController,
+              isLocation: true,
+            ),
+              SizedBox(height: 20.h),
+            TextfieldWithTitle(
+              title: "Event time",
+              controller: timeController,
             ),
           ],
         ),
